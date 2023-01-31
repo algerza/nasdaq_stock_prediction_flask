@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alvaro Ager - Nasdaq stock price prediction</title>
+  </head>
+  <!-- header -->
+
+  <!-- main content -->
+  <!-- <p style="text-align:center;"><img src="https://www.apple.com/favicon.ico" alt="Logo"></p> -->
+  <div id="main-content">
+  <h1 style="font-family: 'Roboto', sans-serif;font-weight: 700;"><center>PREDICT NASDAQ FUTURE STOCK PRICE</center></h1>
+  <p style="font-family: 'Roboto', sans-serif;"><center>Gain control of your investment strategy with accurate stock predictions. Powered by Machine Learning</center></p>
+  <p style="font-family: 'Roboto', sans-serif;"><center>This is a demo project that illustrates an end-to-end ML project</center></p>
+  <!-- <button class="round-corners"; style="font-family: 'Roboto', sans-serif; padding: 15px; background-color: rgb(105, 190, 169); color: rgb(0, 0, 0); border-color: #148d20;"><a href="http://127.0.0.1:5000/plot">Start Predicting</a></button> -->
+  <!-- <a href="https://www.example.com">Visit Example.com</a> -->
+
+
+  <form method="post" style="display: flex; justify-content: center;">
+      <label for="company_name">Company Name:</label>
+      <select name="company_name" id="company_name" required>
+          <option value="" selected disabled hidden>Select a company
+          <option value="AAPL">Apple Inc.</option>
+          <option value="GOOGL">Alphabet Inc.</option>
+          <option value="MSFT">Microsoft Inc.</option>
+          <option value="AMZN">Amazon Inc.</option>
+          <option value="FB">Facebook Inc.</option>
+          <option value="BABA">Alibaba Group Holding Ltd</option>
+          <option value="WMT">Walmart Inc.</option>
+          <option value="TSLA">Tesla Inc.</option>
+          <option value="INTC">Intel Corporation</option>
+          <option value="GE">General Electric Company</option>
+      </select>
+      <select name="period_to_predict" id="period_to_predict" required>
+          <option value="" selected disabled hidden>Select days
+          <option value=7>7 days</option>
+          <option value=14>14 days</option>
+      </select>
+
+      <input type="submit" value="Submit">
+  </form>
+ 
+
+
+
+    <p><center>This is my first chart</center></p>
+    <center><img src="data:image/png;base64,{{ chart1 }}"></center>
+  </body>
+
+  <body>
+    <title>My Chart</title>
+    <p><center>This is my second chart</center></p>
+    <center><img src="data:image/png;base64,{{ chart2 }}"></center>
+  </body>
+
+
+
+
+</html>

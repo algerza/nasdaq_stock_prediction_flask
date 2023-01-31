@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test internal</title>
+  </head>
+
+<!-- 0. HERE STARTS THE STYLING SECTION -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+      /* Add some styling to the charts */
+      #chart1, #chart2 {
+        width: 90%;
+        height: 300px;
+        justify-content: center;
+      }
+
+      /* Styling text */
+      h1 {font-size: 2.5em; color: rgb(255, 255, 255);}
+      h1, h3 {line-height: 0.5;}
+      h3 {color: rgb(161, 161, 161);}
+      h4 {color: rgb(24, 201, 198);}
+      h4_2 {color: rgb(77, 77, 77); line-height: 0.5;}
+
+      /* Make the form boxes transparent */
+      select {
+        background-color: transparent;
+        color: rgb(255, 255, 255);
+        border: 1px solid white;
+        border-radius: 20px; 
+        width: 150px;
+        margin-right: 10px
+      }
+
+      /* Make the form boxes responsive on hover */
+      select:hover {
+        background-color: rgba(255, 255, 255, 0.1); 
+        color: rgb(255, 255, 255);
+        border-radius: 20px; 
+        width: 150px;
+        margin-right: 10px;
+        transition: all 0.5s ease-out;
+        transition: all 0.5s ease-in;
+      }
+
+      /* Change the background color for the main website */
+      body {background: linear-gradient(to right, #2c2e2f, #493257);}
+
+      #text_sections {
+        width: 50%;
+        margin-right:auto;
+        margin-left:auto;
+      }
+
+      /* Change the background color for the charts section */
+      #charts-section {background-color: white;}
+
+      /* Addding margins for the sections */
+      .divider_header {margin: 100px 0;}
+      .divider_sections {margin: 30px 0;}
+      
+    </style>
+
+
+
+
+<!-- 1. HERE STARTS THE MAIN CONTENT SECTION-->
+  <div class="divider_sections"></div>
+
+  <div id="main-content" style="display: flex; justify-content: center; align-items: center;">
+    <img src="https://app.svgator.com/assets/svgator.webapp/log-in-girl.svg" alt="image" width="400" height="300">
+    <!-- <img src="https://www.sapphiresolutions.net/resources/images/Finance_Expense_app/Images/Finance_Expense_App_about.svg" alt="image"> -->
+  </div>
+
+  <div class="divider_sections"></div>
+
+<!-- 1.1 HERE STARTS THE INTRODUCTION BLOCK-->
+  <div id="main-content" style="display: flex; justify-content: center; align-items: center;">
+    <div style="text-align: left;">
+      <h3 style="font-family: 'Roboto', sans-serif;font-weight: 300;">Powered by Machine Learning</h3>
+      <h1 style="font-family: 'Roboto', sans-serif;font-weight: 700;">Predict NASDAQ future stock price</h1>
+      <h3 style="font-family: 'Roboto', sans-serif;font-weight: 300;">Gain control of your investment strategy with accurate stock predictions.</h3>
+      <h3 style="font-family: 'Roboto', sans-serif;font-weight: 300;">This is a demo project that illustrates an end-to-end ML project</h3>
+
+    <div class="divider_sections"></div>
+
+<!-- 1.2 HERE STARTS THE FORM-->    
+      <h4 style="font-family: 'Roboto', sans-serif;font-weight: 700;">Select the values to predict</h4>
+      <form method="post" style="display: flex; justify-content: left; margin-bottom:3.5em">
+        <select name="company_name" id="company_name" required style="height: 50px;">
+            <option value="" selected disabled hidden>Select a company
+            <option value="AAPL">Apple Inc.</option>
+            <option value="GOOGL">Alphabet Inc.</option>
+            <option value="MSFT">Microsoft Inc.</option>
+            <option value="AMZN">Amazon Inc.</option>
+            <option value="FB">Facebook Inc.</option>
+            <option value="BABA">Alibaba Group Holding Ltd</option>
+            <option value="WMT">Walmart Inc.</option>
+            <option value="TSLA">Tesla Inc.</option>
+            <option value="INTC">Intel Corporation</option>
+            <option value="GE">General Electric Company</option>
+        </select>
+        <select name="period_to_predict" id="period_to_predict" required>
+            <option value="" selected disabled hidden>Select days
+            <option value=7>7 days</option>
+            <option value=14>14 days</option>
+            <option value=14>21 days</option>
+            <option value=14>30 days</option>
+        </select>
+            <input type="submit" value="Submit" style= "background-color: rgb(182, 46, 197); color: rgb(255, 255, 255); border: 1px solid rgb(182, 46, 197); border-radius: 20px; width: 150px; margin-right: 10px;">
+      </form>
+    </div>
+  </div>
+
+
+<!-- <script>
+  var select = document.getElementById("company_name");
+  var logo = document.getElementById("company-logo");
+  var faviconUrl = {
+    "AAPL": "https://www.apple.com/favicon.ico",
+    "GOOGL": "https://www.google.com/favicon.ico",
+    "MSFT": "https://www.microsoft.com/favicon.ico",
+    // Add more tickers as needed
+  };
+  select.addEventListener("change", function() {
+    logo.src = faviconUrl[this.value];
+  });
+</script> -->
+
+
+<!-- 2. HERE STARTS THE CHARTS SECTION-->
+
+<div id="charts-section"> 
+  <center><img src="https://www.microsoft.com/favicon.ico" alt="image" width="50" height="50", style="margin-top:2.5em; margin-bottom:1em"></center>
+  <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 600"; margin-top: 100px;><center>These are your results for Microsoft Inc.</center></h4_2>
+  <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300; line-height:2.5"; margin-top: 100px;><center>The model was trained on the past 360 days of available data</center></h4_2>
+
+  <div class="divider_sections"></div>
+
+  <div style="margin: 30px auto; width: 50%; ">
+    <div id="chart1"></div>
+    <div id="chart2"></div>
+  </div>
+
+    <script>
+      
+      // Chart 1 options
+    var options1 = {
+      chart: {
+        type: 'line'
+      },
+      series: [{
+        name: 'sales',
+        data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+
+      
+      }],
+      xaxis: {
+        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+      }
+    }
+    var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
+    chart1.render();
+
+    // Chart 2 options
+    var data1 = [45, 52, 38, 24, 33, 26, 21, 20];
+    var data2 = [0, 0, 0, 0, 0, 0, 0, 20, 82, 56, 45, 47];
+
+    for (var i = 0; i < data1.length; i++) {
+        if(data1[i] === 0) {
+            data1[i] = null;
+        }
+        if(data2[i] === 0) {
+            data2[i] = null;
+        }
+    }
+    
+    var options2 = {
+        series: [{
+          name: "Stock price",
+          data: data1
+        },
+
+        {
+          name: 'Prediction',
+          data: data2
+        }
+      ],
+        chart: {
+        height: 350,
+        type: 'line',
+        zoom: {
+          enabled: false
+        },
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: [5, 7],
+        curve: 'straight',
+        dashArray: [0, 4]
+      },
+      title: {
+        text: 'Page Statistics',
+        align: 'center'
+      },
+      legend: {
+        tooltipHoverFormatter: function(val, opts) {
+          return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+        }
+      },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6
+        }
+      },
+      xaxis: {
+        categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
+          '10 Jan', '11 Jan', '12 Jan'
+        ],
+      },
+      tooltip: {
+        y: [
+          {
+            title: {
+              formatter: function (val) {
+                return val + " ($)"
+              }
+            }
+          },
+
+          {
+            title: {
+              formatter: function (val) {
+                return val;
+              }
+            }
+          }
+        ]
+      },
+      grid: {
+        borderColor: '#f1f1f1',
+      }
+      };
+
+    var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+    chart2.render();
+    </script>
+  </div>
+
+<!-- 3. HERE STARTS THE FOOTER SECTION-->
+<div id="text_sections" style="display: flex; justify-content: center; align-items: center;">
+  <div style="text-align: left;">
+    <div class="divider_sections"></div>
+    <h1 style="font-family: 'Roboto', sans-serif;font-weight: 700;">How does this project work?</h1>
+    <h3 style="font-family: 'Roboto', sans-serif;font-weight: 200; line-height:1.5">
+      The prediction model used in this project is based on the Yahoo Finance Python library, which allows us to obtain the latest data for each company on request. This data is then fed into the Prophet model, an open-source software developed by Facebook's Core Data Science team. Prophet is a procedure for forecasting time series data based on an additive model where non-linear trends are fit with yearly, weekly, and daily seasonality, plus holiday effects. This makes it well suited for time series data that has strong seasonal effects and several seasons of historical data.
+    </h3>
+    <h3 style="font-family: 'Roboto', sans-serif;font-weight: 200; line-height:1.5">
+      The Prophet model utilizes a Bayesian approach, which allows it to make predictions with uncertainty. This means that instead of giving a single point prediction, it provides a range of possible outcomes, allowing users to make more informed decisions. Additionally, Prophet allows for the incorporation of additional regressors, such as external variables, which can help improve the accuracy of the predictions.    </h3>
+    <h3 style="font-family: 'Roboto', sans-serif;font-weight: 200; line-height:1.5">
+      It's important to note that while the prediction model used in this project is based on real data and a powerful forecasting model, it should not be used as the sole basis for making investment decisions. The purpose of this project is to demonstrate the use of machine learning in building a web app, and it should not be relied on as a definitive source of information. It is always important to consult with a financial advisor and conduct your own research before making any investment decisions.    </h3>
+  </div>
+</div>
+</html>
