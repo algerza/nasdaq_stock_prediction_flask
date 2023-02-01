@@ -1,11 +1,28 @@
-# STDLIBimport ioimport base64from flask import Flask, request, render_template, jsonify
-# THIRDPARTYimport matplotlib.pyplot as pltimport matplotlibimport matplotlib.dates as mdatesimport pandas as pdimport plotly.express as px                                                  from prophet import Prophetimport yfinance as yf
+# -*- coding: utf-8 -*-
 
-# RENDER IN BACKEND# Agg a non-interactive backend that can only write to files# matplotlib.use('Agg')
+# STDLIB
+import io
+import base64
+from flask import Flask, request, render_template, jsonify
+
+# THIRDPARTY
+import matplotlib.pyplot as plt
+import matplotlib
+import matplotlib.dates as mdates
+import pandas as pd
+import plotly.express as px
+from prophet import Prophet
+import yfinance as yf
+
+
+# RENDER IN BACKEND
+# Agg a non-interactive backend that can only write to files
+# matplotlib.use('Agg')
+
 app = Flask(__name__)
 
 def select_company(company_name):
-     '''Obtain the data from Yahoo Finance'''
+    '''Obtain the data from Yahoo Finance'''
     # Set the ticker we want    
     yfin = yf.Ticker(company_name)
 
@@ -32,12 +49,13 @@ def run_model(company_name, period_to_predict):
     prediction = m.predict(future)
     return prediction
 
+
 def chart1(period_to_predict):
     x_axis_chart1 = prediction.ds.dt.strftime('%Y-%m-%d').to_list()
     close_values_chart1 = round(prediction.yhat,2).to_list()
-    return x_axis_chart1; close_values_chart1
+    trend_values_chart1 = round(prediction.trend,2).to_list()
+    return x_axis_chart1, close_values_chart1, trend_values_chart1
     
-trend_values_chart1 = round(prediction.trend,2).to_list()
 
 
 
@@ -58,87 +76,85 @@ trend_values_chart1 = round(prediction.trend,2).to_list()
 
 
 
+# def plot1(company_name, period_to_predict):
+#     plt.figure()
+#     df = select_company(company_name)
+#     df = df.rename(columns = {"Date":"ds","Close":"y"})
+#     m = Prophet(daily_seasonality = True)
+#     m.fit(df)
+#     future = m.make_future_dataframe(periods=period_to_predict) 
 
+#     #we need to specify the number of days in future
+#     prediction = m.predict(future)
+#     prediction_plot_df = prediction[['ds', 'yhat_lower', 'yhat', 'yhat_upper']].tail(7).reset_index().drop('index', axis=1)
 
-def plot1(company_name, period_to_predict):
-    plt.figure()
-    df = select_company(company_name)
-    df = df.rename(columns = {"Date":"ds","Close":"y"})
-    m = Prophet(daily_seasonality = True)
-    m.fit(df)
-    future = m.make_future_dataframe(periods=period_to_predict) 
+#     # Create the line plot
+#     plt.plot(prediction_plot_df.ds, prediction_plot_df.yhat, label='Stock Price Prediction')
+#     # Fill the area between the max and min values
+#     plt.fill_between(prediction_plot_df.ds, prediction_plot_df.yhat_lower, prediction_plot_df.yhat_upper, color='gray', alpha=0.1)
+#     plt.xlabel("Date")
+#     plt.ylabel("Stock Price ($)")
+#     plt.xticks(rotation=30)
 
-    #we need to specify the number of days in future
-    prediction = m.predict(future)
-    prediction_plot_df = prediction[['ds', 'yhat_lower', 'yhat', 'yhat_upper']].tail(7).reset_index().drop('index', axis=1)
+#     return None
 
-    # Create the line plot
-    plt.plot(prediction_plot_df.ds, prediction_plot_df.yhat, label='Stock Price Prediction')
-    # Fill the area between the max and min values
-    plt.fill_between(prediction_plot_df.ds, prediction_plot_df.yhat_lower, prediction_plot_df.yhat_upper, color='gray', alpha=0.1)
-    plt.xlabel("Date")
-    plt.ylabel("Stock Price ($)")
-    plt.xticks(rotation=30)
+# def plot2(company_name, period_to_predict):
+#     plt.figure()
+#     df = select_company(company_name)
+#     df = df.rename(columns = {"Date":"ds","Close":"y"}) 
 
-    return None
+#     #renaming the columns of the datas
+#     m = Prophet(daily_seasonality = True)
+#     m.fit(df)
+#     future = m.make_future_dataframe(periods=period_to_predict)
 
-def plot2(company_name, period_to_predict):
-    plt.figure()
-    df = select_company(company_name)
-    df = df.rename(columns = {"Date":"ds","Close":"y"}) 
+#     #we need to specify the number of days in future
+#     prediction = m.predict(future)
+#     m.plot(prediction)
+#     plt.xlabel("Date")
+#     plt.ylabel("Stock Price ($)")
+#     plt.xticks(rotation=30)
 
-    #renaming the columns of the datas
-    m = Prophet(daily_seasonality = True)
-    m.fit(df)
-    future = m.make_future_dataframe(periods=period_to_predict)
-
-    #we need to specify the number of days in future
-    prediction = m.predict(future)
-    m.plot(prediction)
-    plt.xlabel("Date")
-    plt.ylabel("Stock Price ($)")
-    plt.xticks(rotation=30)
-
-    return None
+#     return None
 
 
 
-@app.route('/', methods=['GET', 'POST'])
-    def plot():
-        if request.method == 'POST':
-            company_name = request.form['company_name']
-            period_to_predict = int(request.form['period_to_predict'])
-            string1 = chart1(company_name, period_to_predict)
-            string2 = chart2(company_name, period_to_predict)
-            else:
-                string1 = ""
-                string2 = ""
+# @app.route('/', methods=['GET', 'POST'])
+#     def plot():
+#         if request.method == 'POST':
+#             company_name = request.form['company_name']
+#             period_to_predict = int(request.form['period_to_predict'])
+#             string1 = chart1(company_name, period_to_predict)
+#             string2 = chart2(company_name, period_to_predict)
+#             else:
+#                 string1 = ""
+#                 string2 = ""
                 
-            return render_template('plot.html', chart1=string1, chart2=string2)
+#             return render_template('plot.html', chart1=string1, chart2=string2)
 
 
-def chart1(company_name, period_to_predict):
-    # fig = plot1('AAPL')    
-    fig = plot1(company_name, period_to_predict)
+# def chart1(company_name, period_to_predict):
+#     # fig = plot1('AAPL')    
+#     fig = plot1(company_name, period_to_predict)
 
-    # convert the chart to a png image
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    string1 = base64.b64encode(buf.read()).decode()
+#     # convert the chart to a png image
+#     buf = io.BytesIO()
+#     plt.savefig(buf, format='png')
+#     buf.seek(0)
+#     string1 = base64.b64encode(buf.read()).decode()
     
-    return string1
+#     return string1
 
-def chart2(company_name, period_to_predict):
-    # fig = plot2('AAPL')
-    fig = plot2(company_name, period_to_predict)
+# def chart2(company_name, period_to_predict):
+#     # fig = plot2('AAPL')
+#     fig = plot2(company_name, period_to_predict)
     
-    # convert the chart to a png image
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    string2 = base64.b64encode(buf.read()).decode()
-    return string2
+#     # convert the chart to a png image
+#     buf = io.BytesIO()
+#     plt.savefig(buf, format='png')
+#     buf.seek(0)
+#     string2 = base64.b64encode(buf.read()).decode()
+#     return string2
 
 
 @app.route('/chart')
