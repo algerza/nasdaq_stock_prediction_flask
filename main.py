@@ -16,7 +16,6 @@ from prophet import Prophet
 import yfinance as yf
 
 
-
 app = Flask(__name__)
 
 def select_company(company_name):
@@ -61,8 +60,8 @@ period_to_predict = 9
 prediction = run_model(company_name, period_to_predict)
 
 df = select_company(company_name)
-last_10_days_values = round(df.Close, 2).tail(20).to_list()P
-last_10_days_dates = round(df.Date.astype(str), 2).tail(20).to_list()P
+last_10_days_values = round(df.Close, 2).tail(20).to_list()
+last_10_days_dates = round(df.Date.astype(str), 2).tail(20).to_list()
 
 # testing
 # zeros_time_series = [0] * 20
