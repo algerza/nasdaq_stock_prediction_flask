@@ -79,6 +79,17 @@
             <h3 style="font-family: 'Roboto', sans-serif;font-weight: 300;">This is a demo project that illustrates an end-to-end ML project</h3>
     <div class="divider_sections"></div>
 
+
+
+
+
+
+
+
+
+
+
+    
 <!-- 1.2 HERE STARTS THE FORM-->
     <h4 style="font-family: 'Roboto', sans-serif;font-weight: 700;">Select the values to predict</h4>
     <form method="post" style="display: flex; justify-content: left; margin-bottom:3.5em">
@@ -99,8 +110,8 @@
             <option value="" selected disabled hidden>Select days
             <option value=7>7 days</option>
             <option value=14>14 days</option>
-            <option value=14>21 days</option>
-            <option value=14>30 days</option>
+            <option value=21>21 days</option>
+            <option value=30>30 days</option>
         </select>
             <input type="submit" value="Submit" style= "background-color: rgb(182, 46, 197); color: rgb(255, 255, 255); border: 1px solid rgb(182, 46, 197); border-radius: 20px; width: 150px; margin-right: 10px;">
     </form>
@@ -108,27 +119,13 @@
 </div>
 
 
-<!-- <script>
-  var select = document.getElementById("company_name");
-  var logo = document.getElementById("company-logo");
-  var faviconUrl = {
-    "AAPL": "https://www.apple.com/favicon.ico",
-    "GOOGL": "https://www.google.com/favicon.ico",
-    "MSFT": "https://www.microsoft.com/favicon.ico",
-    // Add more tickers as needed
-  };
-  select.addEventListener("change", function() {
-    logo.src = faviconUrl[this.value];
-  });
-</script> -->
-
-
 <!-- 2. HERE STARTS THE CHARTS SECTION-->
 
-<div id="charts-section"> 
-    <center><img src="https://www.microsoft.com/favicon.ico" alt="image" width="50" height="50", style="margin-top:2.5em; margin-bottom:1em"></center>
-    <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 600"; margin-top: 100px;><center>These are your results for Microsoft Inc.</center></h4_2>
-    <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300; line-height:2.5"; margin-top: 100px;><center>The model was trained on the past 360 days of available data</center></h4_2>
+<div id="charts-section">
+    <center><img id="company-logo" src="https://www.apple.com/favicon.ico" alt="image" width="50" height="50", style="margin-top:2.5em; margin-bottom:1em"></center>
+    <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 600"; margin-top: 100px;><center>These are your results for CompanyName</center></h4_2>
+    <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300; line-height:2.5"; margin-top: 100px;><center>You are predicting the stock price for the next X days</center></h4_2>
+    <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300"; margin-top: 100px;><center>The model was trained on the past 100 days of available data</center></h4_2>
 
     <div class="divider_sections"></div>
 
@@ -136,122 +133,148 @@
         <div id="chart1"></div>
          <div id="chart2"></div>
     </div>
+</div>
+
+
+
+
+
+
+
+<script>
+  var select = document.getElementById("company_name");
+  var logo = document.getElementById("company-logo");
+  var faviconUrl = {
+    "AAPL": "https://www.apple.com/favicon.ico",
+    "GOOGL": "https://www.google.com/favicon.ico",
+    "MSFT": "https://www.microsoft.com/favicon.ico",
+    // Add more tickers as needed
+  };
+  
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    logo.src = faviconUrl[select.value];
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 
-// Chart 1 options
-    var x_axis_chart1 = {{x_axis_chart1|tojson|safe}};
-    var close_values_chart1 = {{close_values_chart1|tojson|safe}};
-    var trend_values_chart1 = {{trend_values_chart1|tojson|safe}};
+    // Chart 1 options
+    var x_axis_chart1 = {{ x_axis_chart1|tojson|safe }};
+    var trend_values_chart1 = {{ trend_values_chart1|tojson|safe }};
+    var close_values_chart1 = {{ close_values_chart1|tojson|safe }};
+
+    for (var i = 0; i < close_values_chart1.length; i++) {
+        if(trend_values_chart1[i] === 0) {
+            trend_values_chart1[i] = null;
+        }
+        if(close_values_chart1[i] === 0) {
+            close_values_chart1[i] = null;
+        }
+    }
 
     var options1 = {
+        series: [
+        {
+        name: 'Closed stock price ($)',
+        data: trend_values_chart1
+        },
+
+        {
+        name: 'Prediction price ($)',
+        data: close_values_chart1,
+        }
+        ],
+
         chart: {
             type: 'line'
         },
-        series: [
-        {
-        name: 'sales',
-        data: close_values_chart1
-        }, 
-        {
-        name: 'trend',
-        data: trend_values_chart1
-        }
-        ],
         xaxis: {
         categories: x_axis_chart1
-        }
-    }
-    var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
-    chart1.render();
-
-    // Chart 2 options
-    var data1 = [45, 52, 38, 24, 33, 26, 21, 20];
-    var data2 = [0, 0, 0, 0, 0, 0, 0, 20, 82, 56, 45, 47];
-
-    for (var i = 0; i < data1.length; i++) {
-        if(data1[i] === 0) {
-            data1[i] = null;
-        }
-        if(data2[i] === 0) {
-            data2[i] = null;
-        }
-    }
-
-    var options2 = {
-        series: [{
-            name: "Stock price",
-            data: data1
-        },
-
-        {
-        name: 'Prediction',
-        data: data2
-        }
-        ],
-        chart: {
-        height: 350,
-        type: 'line',
-        zoom: {
-            enabled: false
-        },
-        },
-        dataLabels: {
-        enabled: false
         },
         stroke: {
         width: [5, 7],
         curve: 'straight',
         dashArray: [0, 4]
-        },
-        title: {
-        text: 'Page Statistics',
-        align: 'center'
-        },
-        legend: {
-        tooltipHoverFormatter: function(val, opts) {
-            return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
         }
-        },
-        markers: {
-        size: 0,
-        hover: {
-            sizeOffset: 6
+    }
+    var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
+    chart1.render();
+
+
+
+
+
+    // Chart 2 options
+    var x_axis_chart2 = {{ x_axis_chart2|tojson|safe }};
+    var trend_values_chart2 = {{ trend_values_chart2|tojson|safe }};
+    var close_values_chart2 = {{ close_values_chart2|tojson|safe }};
+    var max_trend_values_chart2 = {{ max_trend_values_chart2|tojson|safe }};
+    var min_trend_values_chart2 = {{ min_trend_values_chart2|tojson|safe }};
+
+    for (var i = 0; i < close_values_chart2.length; i++) {
+        if(trend_values_chart2[i] === 0) {
+            trend_values_chart2[i] = null;
         }
+        if(close_values_chart2[i] === 0) {
+            close_values_chart2[i] = null;
+        }
+    }
+
+    var options2 = {
+        series: [
+        {
+        name: 'Closed stock price ($)',
+        data: close_values_chart2
+        },
+
+        {
+        name: 'Prediction price ($)',
+        data: trend_values_chart2,
+        },
+        {
+        name: 'Max prediction price ($)',
+        data: max_trend_values_chart2,
+        },       
+        {
+        name: 'Min prediction price ($)',
+        data: min_trend_values_chart2,
+        }
+        ],
+
+        chart: {
+            type: 'line'
         },
         xaxis: {
-        categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-        '10 Jan', '11 Jan', '12 Jan'
-        ],
+        categories: x_axis_chart2
         },
-        tooltip: {
-        y: [
-        {
-        title: {
-        formatter: function (val) {
-            return val + " ($)"
-            }
+        stroke: {
+        width: [5, 7],
+        curve: 'straight',
+        dashArray: [0, 4]
         }
-        },
-
-        {
-        title: {
-        formatter: function (val) {
-            return val;
-            }
-        }
-        }
-        ]
-        },
-        grid: {
-            borderColor: '#f1f1f1',
-        }
-    };
-
+    }
     var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
     chart2.render();
-    </script>
-    </div>
+
+
+
+
+
+</script>
+</div>
 
 <!-- 3. HERE STARTS THE FOOTER SECTION-->
 <div id="text_sections" style="display: flex; justify-content: center; align-items: center;">
