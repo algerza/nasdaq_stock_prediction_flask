@@ -1,0 +1,6 @@
+# Install dependency libraries
+prophet
+yfinance
+plotly
+datetime
+flask
