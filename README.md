@@ -1,4 +1,4 @@
-![alt text](https://github.com/algerza/flask_prophet_web_app/blob/main/flask_nasdaq.gif?raw=true)
+<h1 align="center"><img src="https://github.com/algerza/flask_prophet_web_app/blob/main/flask_nasdaq.gif?raw=true"/></h1>
 
 # Predict NASDAQ future stock price
 
