@@ -92,7 +92,7 @@
     
 <!-- 1.2 HERE STARTS THE FORM-->
     <h4 style="font-family: 'Roboto', sans-serif;font-weight: 700;">Select the values to predict</h4>
-    <form method="post" style="display: flex; justify-content: left; margin-bottom:3.5em">
+    <form id="ticker-form" method="post" style="display: flex; justify-content: left; margin-bottom:3.5em">
         <select name="company_name" id="company_name" required style="height: 50px;">
             <option value="" selected disabled hidden>Select a company
             <option value="AAPL">Apple Inc.</option>
@@ -144,6 +144,7 @@
 <script>
   var select = document.getElementById("company_name");
   var logo = document.getElementById("company-logo");
+  var form = document.getElementById("ticker-form");
   var faviconUrl = {
     "AAPL": "https://www.apple.com/favicon.ico",
     "GOOGL": "https://www.google.com/favicon.ico",
