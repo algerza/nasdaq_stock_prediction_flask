@@ -92,7 +92,7 @@
     
 <!-- 1.2 HERE STARTS THE FORM-->
     <h4 style="font-family: 'Roboto', sans-serif;font-weight: 700;">Select the values to predict</h4>
-    <form id="ticker-form" method="post" style="display: flex; justify-content: left; margin-bottom:3.5em">
+    <form id = "ticker-form" method="post" style="display: flex; justify-content: left; margin-bottom:3.5em">
         <select name="company_name" id="company_name" required style="height: 50px;">
             <option value="" selected disabled hidden>Select a company
             <option value="AAPL">Apple Inc.</option>
@@ -123,8 +123,14 @@
 
 <div id="charts-section">
     <center><img id="company-logo" src="https://www.apple.com/favicon.ico" alt="image" width="50" height="50", style="margin-top:2.5em; margin-bottom:1em"></center>
-    <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 600"; margin-top: 100px;><center>These are your results for CompanyName</center></h4_2>
-    <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300; line-height:2.5"; margin-top: 100px;><center>You are predicting the stock price for the next X days</center></h4_2>
+    <h4_2 id="results-line" style="font-family: 'Roboto', sans-serif; font-weight: 600; margin-top: 100px;">
+        <center>These are your results for <span id="company-name-placeholder">CompanyName</span></center>
+    </h4_2>
+    <h4_2 id="prediction-sentence" style="font-family: 'Roboto', sans-serif; font-weight: 300; line-height: 2.5; margin-top: 100px;">
+        <center>You are predicting the stock price for the next <span id="prediction-days">X</span> days</center>
+    </h4_2>
+    
+    <!-- <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300; line-height:2.5"; margin-top: 100px;><center>You are predicting the stock price for the next X days</center></h4_2> -->
     <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300"; margin-top: 100px;><center>The model was trained on the past 100 days of available data</center></h4_2>
 
     <div class="divider_sections"></div>
@@ -134,10 +140,6 @@
          <div id="chart2"></div>
     </div>
 </div>
-
-
-
-
 
 
 
@@ -154,6 +156,16 @@
   
   form.addEventListener("submit", function(event) {
     event.preventDefault();
+    var selectedCompany = select.options[select.selectedIndex].text; // Get the selected company name
+    var selectedDays = document.getElementById("period_to_predict").value; // Get the selected number of days
+    var companyNamePlaceholder = document.getElementById("company-name-placeholder");
+    var predictionDaysPlaceholder = document.getElementById("prediction-days");
+
+    // Update the content with the selected company name and number of days
+    companyNamePlaceholder.textContent = selectedCompany;
+    predictionDaysPlaceholder.textContent = selectedDays;
+
+    // Update other elements or perform additional actions as needed
     logo.src = faviconUrl[select.value];
   });
 </script>
@@ -291,4 +303,7 @@
         It's important to note that while the prediction model used in this project is based on real data and a powerful forecasting model, it should not be used as the sole basis for making investment decisions. The purpose of this project is to demonstrate the use of machine learning in building a web app, and it should not be relied on as a definitive source of information. It is always important to consult with a financial advisor and conduct your own research before making any investment decisions.    </h3>
     </div>
 </div>
+
+
+
 </html>
