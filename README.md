@@ -25,7 +25,7 @@ Therefore, Prophet is not the best choice for accurate results, but it is very s
 
 ## How to use it?
 
-### Docker
+Open the terminal and follow these commands (installing Docker is a pre-requisite):
 
 Build the Docker container:
 
