@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>test internal</title>
+        <title>Nasdaq Stock Price Prediction</title>
     </head>
 
 <!-- 0. HERE STARTS THE STYLING SECTION -->
@@ -60,17 +60,15 @@
 </style>
 
 
-
-
 <!-- 1. HERE STARTS THE MAIN CONTENT SECTION-->
 <div class="divider_sections"></div>
     <div id="main-content" style="display: flex; justify-content: center; align-items: center;">
         <img src="https://app.svgator.com/assets/svgator.webapp/log-in-girl.svg" alt="image" width="400" height="300">
-        <!-- <img src="https://www.sapphiresolutions.net/resources/images/Finance_Expense_app/Images/Finance_Expense_App_about.svg" alt="image"> -->
     </div>
 <div class="divider_sections"></div>
 
-<!-- 1.1 HERE STARTS THE INTRODUCTION BLOCK-->
+
+<!-- 1.1 HERE STARTS THE INTRODUCTION TEXT BLOCK-->
     <div id="main-content" style="display: flex; justify-content: center; align-items: center;">
         <div style="text-align: left;">
             <h3 style="font-family: 'Roboto', sans-serif;font-weight: 300;">Powered by Machine Learning</h3>
@@ -78,16 +76,6 @@
             <h3 style="font-family: 'Roboto', sans-serif;font-weight: 300;">Gain control of your investment strategy with accurate stock predictions.</h3>
             <h3 style="font-family: 'Roboto', sans-serif;font-weight: 300;">This is a demo project that illustrates an end-to-end ML project</h3>
     <div class="divider_sections"></div>
-
-
-
-
-
-
-
-
-
-
 
     
 <!-- 1.2 HERE STARTS THE FORM-->
@@ -119,8 +107,6 @@
 </div>
 
 
-
-
 <!-- 2. HERE STARTS THE CHARTS SECTION-->
 
 <div id="charts-section">
@@ -132,12 +118,8 @@
     <h4_2 id="prediction-sentence" style="font-family: 'Roboto', sans-serif; font-weight: 300; line-height: 2.5; margin-top: 100px;">
         <center>You are predicting the stock price for the next <span id="prediction-days">{{ selected_days }}</span> days</center>
     </h4_2>
-    
-    <!-- <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300; line-height:2.5"; margin-top: 100px;><center>You are predicting the stock price for the next X days</center></h4_2> -->
     <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300"; margin-top: 100px;><center>The model was trained on the past 100 days of available data</center></h4_2>
-
     <div class="divider_sections"></div>
-
     <div style="margin: 30px auto; width: 50%; ">
         <div id="chart1"></div>
          <div id="chart2"></div>
@@ -145,48 +127,8 @@
 </div>
 
 
-
+<!-- 2.1 HERE STARTS THE CHART 1-->
 <script>
-  var select = document.getElementById("company_name");
-  var logo = document.getElementById("company-logo");
-//   var form = document.getElementById("ticker-form");
-  var faviconUrl = {
-    "AAPL": "https://www.apple.com/favicon.ico",
-    "GOOGL": "https://www.google.com/favicon.ico",
-    "MSFT": "https://www.microsoft.com/favicon.ico",
-    // Add more tickers as needed
-  }; 
-  
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    var selectedCompany = select.options[select.selectedIndex].text; // Get the selected company name
-    var selectedDays = document.getElementById("period_to_predict").value; // Get the selected number of days
-    var companyNamePlaceholder = document.getElementById("company-name-placeholder");
-    var predictionDaysPlaceholder = document.getElementById("prediction-days");
-
-    // Update the content with the selected company name and number of days
-    companyNamePlaceholder.textContent = selectedCompany;
-    predictionDaysPlaceholder.textContent = selectedDays;
-
-    // Update other elements or perform additional actions as needed
-    logo.src = faviconUrl[select.value];
-  });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-
     // Chart 1 options
     var x_axis_chart1 = {{ x_axis_chart1|tojson|safe }};
     var trend_values_chart1 = {{ trend_values_chart1|tojson|safe }};
@@ -230,9 +172,7 @@
     chart1.render();
 
 
-
-
-
+<!-- 2.2 HERE STARTS THE CHART 2-->
     // Chart 2 options
     var x_axis_chart2 = {{ x_axis_chart2|tojson|safe }};
     var trend_values_chart2 = {{ trend_values_chart2|tojson|safe }};
@@ -284,11 +224,6 @@
     }
     var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
     chart2.render();
-
-
-
-
-
 </script>
 </div>
 
@@ -306,7 +241,4 @@
         It's important to note that while the prediction model used in this project is based on real data and a powerful forecasting model, it should not be used as the sole basis for making investment decisions. The purpose of this project is to demonstrate the use of machine learning in building a web app, and it should not be relied on as a definitive source of information. It is always important to consult with a financial advisor and conduct your own research before making any investment decisions.    </h3>
     </div>
 </div>
-
-
-
 </html>
