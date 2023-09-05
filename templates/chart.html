@@ -99,7 +99,7 @@
             <option value="GOOGL">Alphabet Inc.</option>
             <option value="MSFT">Microsoft Inc.</option>
             <option value="AMZN">Amazon Inc.</option>
-            <option value="FB">Facebook Inc.</option>
+            <option value="META">Meta Platforms Inc.</option> 
             <option value="BABA">Alibaba Group Holding Ltd</option>
             <option value="WMT">Walmart Inc.</option>
             <option value="TSLA">Tesla Inc.</option>
@@ -119,15 +119,18 @@
 </div>
 
 
+
+
 <!-- 2. HERE STARTS THE CHARTS SECTION-->
 
 <div id="charts-section">
-    <center><img id="company-logo" src="https://www.apple.com/favicon.ico" alt="image" width="50" height="50", style="margin-top:2.5em; margin-bottom:1em"></center>
+    <center><img id="company-logo" src="{{ selected_logo_url }}" alt="image" width="50" height="50" style="margin-top:2.5em; margin-bottom:1em">
+    </center>
     <h4_2 id="results-line" style="font-family: 'Roboto', sans-serif; font-weight: 600; margin-top: 100px;">
-        <center>These are your results for <span id="company-name-placeholder">CompanyName</span></center>
+        <center>These are your results for <span id="company-name-placeholder">{{ selected_company_name }}</span></center>
     </h4_2>
     <h4_2 id="prediction-sentence" style="font-family: 'Roboto', sans-serif; font-weight: 300; line-height: 2.5; margin-top: 100px;">
-        <center>You are predicting the stock price for the next <span id="prediction-days">X</span> days</center>
+        <center>You are predicting the stock price for the next <span id="prediction-days">{{ selected_days }}</span> days</center>
     </h4_2>
     
     <!-- <h4_2 style="font-family: 'Roboto', sans-serif;font-weight: 300; line-height:2.5"; margin-top: 100px;><center>You are predicting the stock price for the next X days</center></h4_2> -->
@@ -146,13 +149,13 @@
 <script>
   var select = document.getElementById("company_name");
   var logo = document.getElementById("company-logo");
-  var form = document.getElementById("ticker-form");
+//   var form = document.getElementById("ticker-form");
   var faviconUrl = {
     "AAPL": "https://www.apple.com/favicon.ico",
     "GOOGL": "https://www.google.com/favicon.ico",
     "MSFT": "https://www.microsoft.com/favicon.ico",
     // Add more tickers as needed
-  };
+  }; 
   
   form.addEventListener("submit", function(event) {
     event.preventDefault();
