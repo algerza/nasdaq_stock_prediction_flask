@@ -23,7 +23,7 @@ This data is then fed into the Prophet model, an open-source software developed 
 
 Therefore, Prophet is not the best choice for accurate results, but it is very simple to implement and showcase this example.
 
-## Development
+## How to use it?
 
 ### Docker
 
@@ -38,3 +38,11 @@ Run the container locally on port 8080:
 ```bash
 docker run -d -p 8080:5000 nasdaq_stock_prediction
 ```
+
+Access the website created inside Docker:
+
+```bash
+http://127.0.0.1:8080/chart
+```
+
+
