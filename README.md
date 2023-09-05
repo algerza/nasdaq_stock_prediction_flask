@@ -45,4 +45,6 @@ Access the website created inside Docker:
 http://127.0.0.1:8080/chart
 ```
 
+In order to avoid errors, please make sure there is no conflict with the process using port 8080
+
 
