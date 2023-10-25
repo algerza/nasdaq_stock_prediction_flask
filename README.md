@@ -13,7 +13,12 @@ Select on the drop down menu the company name, the number of days you want to pr
 
 You will find a first chart with the latest days' stock close price and the price prediction for the selected days. On the second chart you will find the time serie for the past 100 days with the actual stock close price and the model parameters, so you can observe how well the model fit the data.
 
-<h3 align="center"><img src="https://github.com/algerza/flask_prophet_web_app/blob/main/flask_nasdaq.gif?raw=true"/></h3>
+
+<p align="center">
+  <img src="https://github.com/algerza/flask_prophet_web_app/raw/main/flask_nasdaq.gif" alt="Alt Text">
+</p>
+
+
 
 ### How was it built and why?
 
